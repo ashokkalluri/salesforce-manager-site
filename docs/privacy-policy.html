@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — Salesforce Manager Chrome Extension</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      color: #1d1d1f;
+      background: #f5f5f7;
+    }
+    header {
+      background: #032d60;
+      color: #fff;
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+    }
+    header h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.25rem; }
+    header p  { font-size: 0.95rem; opacity: 0.8; }
+    main {
+      max-width: 780px;
+      margin: 2.5rem auto 4rem;
+      padding: 0 1.5rem;
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 2rem 2.25rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,.07);
+    }
+    h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #032d60;
+      margin: 2rem 0 0.5rem;
+      padding-bottom: 0.35rem;
+      border-bottom: 2px solid #e8f0fe;
+    }
+    h2:first-child { margin-top: 0; }
+    p  { margin: 0.6rem 0; }
+    ul { margin: 0.6rem 0 0.6rem 1.4rem; }
+    li { margin-bottom: 0.35rem; }
+    strong { color: #032d60; }
+    .highlight {
+      background: #e8f5e9;
+      border-left: 4px solid #2e7d32;
+      padding: 0.9rem 1.1rem;
+      border-radius: 0 8px 8px 0;
+      margin: 1rem 0;
+      font-size: 0.95rem;
+    }
+    .effective {
+      font-size: 0.85rem;
+      color: #888;
+      margin-top: 2rem;
+      text-align: right;
+    }
+    footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #aaa;
+      padding: 1.5rem;
+    }
+    a { color: #0070d2; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Privacy Policy</h1>
+  <p>Salesforce Manager &mdash; Chrome Extension</p>
+</header>
+
+<main>
+  <div class="card">
+
+    <h2>Overview</h2>
+    <p>
+      <strong>Salesforce Manager</strong> is a Chrome extension that helps Salesforce administrators
+      browse and compare Permission Set object permissions directly from their browser.
+      This policy explains what data the extension accesses, how it is used, and what is
+      stored — in plain language.
+    </p>
+
+    <div class="highlight">
+      <strong>Short version:</strong> All data stays in your browser. Nothing is sent to any
+      server other than your own Salesforce org. No analytics. No tracking. No accounts.
+    </div>
+
+    <h2>Data Accessed</h2>
+    <p>The extension accesses the following data solely to operate its features:</p>
+    <ul>
+      <li>
+        <strong>Salesforce session cookie (<code>sid</code>):</strong> Read from your active
+        browser session to authenticate REST API calls to your Salesforce org. The cookie value
+        is never logged, stored persistently, or transmitted anywhere other than back to your
+        own Salesforce org.
+      </li>
+      <li>
+        <strong>Active tab URL:</strong> Read once when you click the extension icon, to
+        identify your Salesforce org domain. No browsing history is accessed.
+      </li>
+      <li>
+        <strong>Salesforce metadata (read-only):</strong> Permission Set names and object
+        permission records are fetched from your org via the Salesforce REST API. This data
+        is displayed in the extension UI and is never stored or transmitted elsewhere.
+      </li>
+    </ul>
+
+    <h2>Data Storage</h2>
+    <ul>
+      <li>
+        The org URL and session information are stored in <strong><code>chrome.storage.session</code></strong>
+        — this is in-memory storage that is automatically cleared when you close the browser or
+        the extension tab. It is never written to disk or synced.
+      </li>
+      <li>No data is stored in <code>localStorage</code>, cookies set by the extension, or any
+      external database.</li>
+      <li>No data persists after the browser session ends.</li>
+    </ul>
+
+    <h2>Data Sharing</h2>
+    <p>
+      The extension does <strong>not</strong> share, sell, transmit, or disclose any data to
+      any third party. All API calls are made directly from your browser to your Salesforce
+      org. No intermediate server is involved.
+    </p>
+
+    <h2>Permissions Justification</h2>
+    <ul>
+      <li><strong><code>cookies</code>:</strong> Required to read the active Salesforce session token (<code>sid</code>) so the extension can make authenticated API calls to your org without requiring a separate login.</li>
+      <li><strong><code>storage</code>:</strong> Used to temporarily hold the org URL in <code>chrome.storage.session</code> within the current browser session only.</li>
+      <li><strong><code>tabs</code>:</strong> Required to read the URL of the active tab to identify which Salesforce org you are working in.</li>
+      <li><strong>Host permissions (<code>*.salesforce.com</code>, <code>*.force.com</code>, etc.):</strong> Required to make REST API calls to your Salesforce org from the extension background service worker.</li>
+    </ul>
+
+    <h2>External Resources</h2>
+    <p>
+      The extension loads the <strong>Salesforce Lightning Design System (SLDS)</strong> CSS
+      from the jsDelivr CDN (<code>cdn.jsdelivr.net</code>) for styling. This is a public,
+      open-source stylesheet. No personal data is included in this request.
+    </p>
+
+    <h2>Children's Privacy</h2>
+    <p>
+      This extension is intended for Salesforce administrators and does not knowingly collect
+      any information from children under 13.
+    </p>
+
+    <h2>Changes to This Policy</h2>
+    <p>
+      If this policy is updated, the revised version will be published at this URL with an
+      updated effective date. Continued use of the extension after changes constitutes
+      acceptance of the updated policy.
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      If you have questions about this privacy policy, please contact via the Chrome Web Store support page.
+    </p>
+
+    <p class="effective">Effective date: April 3, 2026</p>
+
+  </div>
+</main>
+
+<footer>
+  &copy; 2026 Ashok Kumar Kalluri. All Rights Reserved. &nbsp;|&nbsp;
+  Salesforce is a registered trademark of Salesforce.com, Inc.
+  This extension is not affiliated with or endorsed by Salesforce.com, Inc.
+</footer>
+
+</body>
+</html>

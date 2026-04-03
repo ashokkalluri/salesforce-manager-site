@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Salesforce Manager — Chrome Extension for Salesforce Admins</title>
+  <meta name="description" content="A free Chrome extension for Salesforce admins to browse, compare, import and export Permission Set object and field permissions — directly from your browser." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #1d1d1f;
+      background: #fff;
+    }
+    a { color: #0070d2; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, #032d60 0%, #0070d2 100%);
+      color: #fff;
+      padding: 5rem 1.5rem 4rem;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border-radius: 20px;
+      padding: 0.3rem 0.9rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+      line-height: 1.15;
+    }
+    .hero p {
+      font-size: 1.15rem;
+      opacity: 0.88;
+      max-width: 580px;
+      margin: 0 auto 2rem;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: opacity .15s;
+    }
+    .btn:hover { opacity: 0.88; text-decoration: none; }
+    .btn-primary { background: #fff; color: #032d60; }
+
+    /* ── Sections ── */
+    section { padding: 4rem 1.5rem; }
+    .container { max-width: 960px; margin: 0 auto; }
+    .section-label {
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: #0070d2;
+      margin-bottom: 0.5rem;
+    }
+    h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 800;
+      color: #032d60;
+      margin-bottom: 0.75rem;
+    }
+    .section-intro {
+      font-size: 1.05rem;
+      color: #444;
+      max-width: 640px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── Feature grid ── */
+    .features { background: #f5f8ff; }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .feature-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.6rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,.06);
+    }
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+    .feature-card h3 { font-size: 1rem; font-weight: 700; color: #032d60; margin-bottom: 0.4rem; }
+    .feature-card p  { font-size: 0.9rem; color: #555; }
+
+    /* ── How it works ── */
+    .steps { counter-reset: step; }
+    .step {
+      display: flex;
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+      align-items: flex-start;
+    }
+    .step-num {
+      counter-increment: step;
+      min-width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #032d60;
+      color: #fff;
+      font-weight: 800;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-num::before { content: counter(step); }
+    .step h3 { font-size: 1rem; font-weight: 700; color: #032d60; margin-bottom: 0.25rem; }
+    .step p  { font-size: 0.9rem; color: #555; }
+
+    /* ── Permissions table ── */
+    .perm-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
+    .perm-table th, .perm-table td {
+      text-align: left;
+      padding: 0.65rem 1rem;
+      border-bottom: 1px solid #e5e5e5;
+      font-size: 0.9rem;
+    }
+    .perm-table th { background: #f5f8ff; font-weight: 700; color: #032d60; }
+    .perm-table tr:last-child td { border-bottom: none; }
+    code {
+      background: #f0f4f8;
+      border-radius: 4px;
+      padding: 0.1em 0.4em;
+      font-size: 0.85em;
+      font-family: "SF Mono", "Fira Code", monospace;
+    }
+
+    /* ── Privacy callout ── */
+    .privacy-strip {
+      background: #e8f5e9;
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      margin-top: 2rem;
+    }
+    .privacy-strip .icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 0.1rem; }
+    .privacy-strip h3 { font-size: 1rem; font-weight: 700; color: #2e7d32; margin-bottom: 0.3rem; }
+    .privacy-strip p  { font-size: 0.9rem; color: #444; }
+
+    /* ── CTA strip ── */
+    .cta { background: #032d60; color: #fff; text-align: center; }
+    .cta h2 { color: #fff; }
+    .cta p  { opacity: 0.8; max-width: 520px; margin: 0.75rem auto 2rem; }
+
+    /* ── Footer ── */
+    footer {
+      background: #f5f5f7;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #888;
+      padding: 1.5rem;
+    }
+    footer a { color: #888; }
+  </style>
+</head>
+<body>
+
+<!-- ── Hero ── -->
+<div class="hero">
+  <div class="hero-badge">Free Chrome Extension</div>
+  <h1>Salesforce Manager</h1>
+  <p>Browse, compare, import, and export Permission Set object &amp; field permissions — right from your browser. No setup required.</p>
+  <a href="https://chrome.google.com/webstore" class="btn btn-primary">Add to Chrome — It's Free</a>
+</div>
+
+<!-- ── Features ── -->
+<section class="features">
+  <div class="container">
+    <div class="section-label">Features</div>
+    <h2>Everything a Salesforce admin needs</h2>
+    <p class="section-intro">One extension. Two powerful managers. No Connected App, no OAuth setup, no extra logins.</p>
+
+    <div class="feature-grid">
+
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#e8f0fe;">&#128274;</div>
+        <h3>Object Permissions Matrix</h3>
+        <p>Select multiple Permission Sets and view a side-by-side matrix of C / R / U / D / VA / MA permissions per object. Filter by permission type or object name.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#fce8ff;">&#128203;</div>
+        <h3>Field Permissions Matrix</h3>
+        <p>Drill into any object's field-level security across Permission Sets. See Read / Edit access per field in one scrollable table.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#e8f5e9;">&#8659;</div>
+        <h3>Export to Excel</h3>
+        <p>Download the full permissions matrix as a structured <code>.xlsx</code> file for offline review, auditing, or sharing with stakeholders.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#fff3e0;">&#8657;</div>
+        <h3>Import &amp; Apply Changes</h3>
+        <p>Upload a modified <code>.xlsx</code> file, preview a delta of what changed, then apply the changes directly to your org in one click.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#e8f0fe;">&#128269;</div>
+        <h3>Smart Filtering</h3>
+        <p>Filter objects and fields by permission type. Dependency rules automatically enforce Salesforce's permission hierarchy (e.g. Edit requires Read).</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#fce8ff;">&#128274;</div>
+        <h3>No Login Required</h3>
+        <p>Uses your existing Salesforce browser session automatically. No Connected App, no OAuth, no client ID to configure.</p>
+      </div>
+
+    </div>
+
+    <div class="privacy-strip">
+      <div class="icon">&#128274;</div>
+      <div>
+        <h3>Your data never leaves your browser</h3>
+        <p>All API calls go directly to your Salesforce org. No data is sent to any external server, tracked, or stored beyond your current browser session. <a href="privacy-policy.html">Read the full privacy policy.</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── How it works ── -->
+<section>
+  <div class="container">
+    <div class="section-label">How it works</div>
+    <h2>Up and running in seconds</h2>
+    <p class="section-intro">No configuration needed. Just install and click.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num"></div>
+        <div>
+          <h3>Install the extension</h3>
+          <p>Add Salesforce Manager from the Chrome Web Store. No sign-up required.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div>
+          <h3>Log in to your Salesforce org</h3>
+          <p>Navigate to any Salesforce org tab in Chrome as you normally would.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div>
+          <h3>Click the extension icon</h3>
+          <p>The Salesforce Manager page opens in a new tab, already connected to your org.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div>
+          <h3>Select Permission Sets and explore</h3>
+          <p>Search and multi-select Permission Sets, then switch between Object and Field Permissions tabs to explore, export, or import.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Permissions reference ── -->
+<section style="background:#f5f8ff;">
+  <div class="container">
+    <div class="section-label">Reference</div>
+    <h2>Supported permissions</h2>
+
+    <p class="section-intro">Object Permissions tab — 7 permission columns per Permission Set:</p>
+    <table class="perm-table">
+      <thead>
+        <tr><th>Column</th><th>Salesforce Field</th><th>Meaning</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>C</strong></td><td><code>PermissionsCreate</code></td><td>Create records</td></tr>
+        <tr><td><strong>R</strong></td><td><code>PermissionsRead</code></td><td>Read records</td></tr>
+        <tr><td><strong>U</strong></td><td><code>PermissionsEdit</code></td><td>Edit / Update records</td></tr>
+        <tr><td><strong>D</strong></td><td><code>PermissionsDelete</code></td><td>Delete records</td></tr>
+        <tr><td><strong>VA</strong></td><td><code>PermissionsViewAllRecords</code></td><td>View All Records</td></tr>
+        <tr><td><strong>MA</strong></td><td><code>PermissionsModifyAllRecords</code></td><td>Modify All Records</td></tr>
+        <tr><td><strong>&ndash;</strong></td><td>—</td><td>No permissions granted</td></tr>
+      </tbody>
+    </table>
+
+    <p class="section-intro" style="margin-top:2rem;">Field Permissions tab — 2 permission columns per Permission Set:</p>
+    <table class="perm-table">
+      <thead>
+        <tr><th>Column</th><th>Meaning</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>R</strong></td><td>Read access to the field</td></tr>
+        <tr><td><strong>E</strong></td><td>Edit access to the field</td></tr>
+        <tr><td><strong>&ndash;</strong></td><td>No field access</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta">
+  <div class="container">
+    <h2>Ready to take control of your permissions?</h2>
+    <p>Free, open source, and built for Salesforce admins.</p>
+    <a href="https://chrome.google.com/webstore" class="btn btn-primary">Add to Chrome</a>
+  </div>
+</section>
+
+<footer>
+  &copy; 2026 Ashok Kumar Kalluri. All Rights Reserved. &nbsp;|&nbsp;
+  <a href="privacy-policy.html">Privacy Policy</a><br><br>
+  Salesforce is a registered trademark of Salesforce.com, Inc. This extension is not affiliated with or endorsed by Salesforce.com, Inc.
+</footer>
+
+</body>
+</html>
