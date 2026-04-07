@@ -166,6 +166,45 @@
     .privacy-strip h3 { font-size: 1rem; font-weight: 700; color: #2e7d32; margin-bottom: 0.3rem; }
     .privacy-strip p  { font-size: 0.9rem; color: #444; }
 
+    /* ── Screenshots ── */
+    .screenshot-group { margin-bottom: 3rem; }
+    .screenshot-group:last-child { margin-bottom: 0; }
+    .screenshot-group-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #032d60;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #e5e5e5;
+    }
+    .screenshot-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+      gap: 1.5rem;
+    }
+    .screenshot-grid--3 {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+    .screenshot-grid figure {
+      margin: 0;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.08);
+      overflow: hidden;
+    }
+    .screenshot-grid figure a { display: block; }
+    .screenshot-grid figure img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-bottom: 1px solid #eee;
+    }
+    .screenshot-grid figcaption {
+      padding: 0.75rem 1rem;
+      font-size: 0.85rem;
+      color: #555;
+    }
+
     /* ── CTA strip ── */
     .cta { background: #032d60; color: #fff; text-align: center; }
     .cta h2 { color: #fff; }
@@ -176,10 +215,10 @@
       background: #f5f5f7;
       text-align: center;
       font-size: 0.8rem;
-      color: #888;
+      color: #666;
       padding: 1.5rem;
     }
-    footer a { color: #888; }
+    footer a { color: #666; }
   </style>
 </head>
 <body>
@@ -199,50 +238,108 @@
     <h2>Everything a Salesforce admin needs</h2>
     <p class="section-intro">One extension. Two powerful managers. No Connected App, no OAuth setup, no extra logins.</p>
 
-    <div class="feature-grid">
-
-      <div class="feature-card">
-        <div class="feature-icon" style="background:#e8f0fe;">&#128274;</div>
-        <h3>Object Permissions Matrix</h3>
-        <p>Select multiple Permission Sets and view a side-by-side matrix of C / R / U / D / VA / MA permissions per object. Filter by permission type or object name.</p>
+    <div class="screenshot-group">
+      <div class="screenshot-group-title">Permission Set Manager</div>
+      <div class="feature-grid" style="margin-bottom:1.5rem;">
+        <div class="feature-card">
+          <div class="feature-icon" style="background:#e8f0fe;">&#128274;</div>
+          <h3>Object Permissions Matrix</h3>
+          <p>Select multiple Permission Sets and view a side-by-side matrix of C / R / U / D / VA / MA permissions per object. Filter by permission type or object name.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:#fce8ff;">&#128203;</div>
+          <h3>Field Permissions Matrix</h3>
+          <p>Drill into any object's field-level security across Permission Sets. See Read / Edit access per field in one scrollable table.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:#e8f0fe;">&#128269;</div>
+          <h3>Smart Filtering</h3>
+          <p>Filter objects and fields by permission type. Dependency rules automatically enforce Salesforce's permission hierarchy (e.g. Edit requires Read).</p>
+        </div>
       </div>
-
-      <div class="feature-card">
-        <div class="feature-icon" style="background:#fce8ff;">&#128203;</div>
-        <h3>Field Permissions Matrix</h3>
-        <p>Drill into any object's field-level security across Permission Sets. See Read / Edit access per field in one scrollable table.</p>
+      <div class="screenshot-grid">
+        <figure>
+          <a href="images/object-permissions-manager.png" target="_blank">
+            <img src="images/object-permissions-manager.png" alt="Object Permissions Manager showing a side-by-side CRUDVAMA matrix across multiple Permission Sets" />
+          </a>
+          <figcaption>Object Permissions Manager — side-by-side C/R/U/D/VA/MA matrix across Permission Sets</figcaption>
+        </figure>
+        <figure>
+          <a href="images/field-permissions-manager.png" target="_blank">
+            <img src="images/field-permissions-manager.png" alt="Field Permissions Manager showing Read and Edit access per field" />
+          </a>
+          <figcaption>Field Permissions Manager — Read/Edit access per field across Permission Sets</figcaption>
+        </figure>
       </div>
+    </div>
 
-      <div class="feature-card">
-        <div class="feature-icon" style="background:#e8f5e9;">&#8659;</div>
-        <h3>Export to Excel</h3>
-        <p>Download the full permissions matrix as a structured <code>.xlsx</code> file for offline review, auditing, or sharing with stakeholders.</p>
+    <div class="screenshot-group">
+      <div class="screenshot-group-title">Import &amp; Compare</div>
+      <div class="feature-grid" style="margin-bottom:1.5rem;">
+        <div class="feature-card">
+          <div class="feature-icon" style="background:#e8f5e9;">&#8659;</div>
+          <h3>Export to Excel</h3>
+          <p>Download the full permissions matrix as a structured <code>.xlsx</code> file for offline review, auditing, or sharing with stakeholders.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:#fff3e0;">&#8657;</div>
+          <h3>Import &amp; Apply Changes</h3>
+          <ul style="font-size:0.9rem;color:#555;padding-left:1.2rem;line-height:1.7;">
+            <li>Upload a modified <code>.xlsx</code>, preview the delta, and apply changes in one click.</li>
+            <li>Export from one org and import into another to compare and replicate permissions across orgs.</li>
+          </ul>
+        </div>
       </div>
-
-      <div class="feature-card">
-        <div class="feature-icon" style="background:#fff3e0;">&#8657;</div>
-        <h3>Import &amp; Apply Changes</h3>
-        <p>Upload a modified <code>.xlsx</code> file, preview a delta of what changed, then apply the changes directly to your org in one click.</p>
+      <div class="screenshot-grid">
+        <figure>
+          <a href="images/import-object-permissions.png" target="_blank">
+            <img src="images/import-object-permissions.png" alt="Import and Compare Object Permissions showing a delta preview before applying changes" />
+          </a>
+          <figcaption>Import &amp; Compare Object Permissions — review the delta before saving to your org</figcaption>
+        </figure>
+        <figure>
+          <a href="images/import-field-permissions.png" target="_blank">
+            <img src="images/import-field-permissions.png" alt="Import and Compare Field Permissions showing field-level changes" />
+          </a>
+          <figcaption>Import &amp; Compare Field Permissions — see exactly which fields will change</figcaption>
+        </figure>
       </div>
+    </div>
 
-      <div class="feature-card">
-        <div class="feature-icon" style="background:#e8f0fe;">&#128269;</div>
-        <h3>Smart Filtering</h3>
-        <p>Filter objects and fields by permission type. Dependency rules automatically enforce Salesforce's permission hierarchy (e.g. Edit requires Read).</p>
+    <div class="screenshot-group">
+      <div class="screenshot-group-title">Tab Colours for Multiple Orgs</div>
+      <div class="feature-grid" style="margin-bottom:1.5rem;">
+        <div class="feature-card">
+          <div class="feature-icon" style="background:#e8f5e9;">&#127774;</div>
+          <h3>Tab Colours for Multiple Orgs</h3>
+          <p>Automatically colour-codes the browser tab favicon for each org so you can tell them apart at a glance — no more squinting at URLs. Customise colours, toggle the feature on or off, and import/export your colour settings from within the extension.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:#fce8ff;">&#128274;</div>
+          <h3>No Login Required</h3>
+          <p>Uses your existing Salesforce browser session automatically. No Connected App, no OAuth, no client ID to configure.</p>
+        </div>
       </div>
-
-      <div class="feature-card">
-        <div class="feature-icon" style="background:#fce8ff;">&#128274;</div>
-        <h3>No Login Required</h3>
-        <p>Uses your existing Salesforce browser session automatically. No Connected App, no OAuth, no client ID to configure.</p>
+      <div class="screenshot-grid screenshot-grid--3">
+        <figure>
+          <a href="images/tab-colours.png" target="_blank">
+            <img src="images/tab-colours.png" alt="Browser tabs showing colour-coded Salesforce org favicons" />
+          </a>
+          <figcaption>Colour-coded tab favicons — tell orgs apart at a glance</figcaption>
+        </figure>
+        <figure>
+          <a href="images/domain-colours-modal.png" target="_blank">
+            <img src="images/domain-colours-modal.png" alt="Domain Colours modal for customising per-org favicon colours" />
+          </a>
+          <figcaption>Domain Colours — customise each org's colour, export/import settings</figcaption>
+        </figure>
+        <figure>
+          <a href="images/favicon-toggle.png" target="_blank">
+            <img src="images/favicon-toggle.png" alt="Modify Favicons and Enable Favicons toggle controls" />
+          </a>
+          <figcaption>Toggle favicon colouring on/off directly from the extension header</figcaption>
+        </figure>
       </div>
-
-      <div class="feature-card">
-        <div class="feature-icon" style="background:#e8f5e9;">&#127774;</div>
-        <h3>Tab Colours for Multiple Orgs</h3>
-        <p>Automatically colour-codes the browser tab favicon for each org so you can tell them apart at a glance — no more squinting at URLs. Customise colours, toggle the feature on or off, and import/export your colour settings from within the extension.</p>
-      </div>
-
     </div>
 
     <div class="privacy-strip">
