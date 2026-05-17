@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Salesforce Manager — Chrome Extension for Salesforce Admins</title>
-  <meta name="description" content="A free Chrome extension for Salesforce admins to browse, compare, import and export Permission Set object and field permissions — directly from your browser." />
+  <meta name="description" content="A free Chrome extension for Salesforce admins to compare Permission Sets and Profiles — view object and field permissions side by side, export to Excel, and apply changes directly from your browser." />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -227,7 +227,7 @@
 <div class="hero">
   <div class="hero-badge">Free Chrome Extension</div>
   <h1>Salesforce Manager</h1>
-  <p>Browse, compare, import, and export Permission Set object &amp; field permissions — right from your browser. No setup required.</p>
+  <p>Compare Permission Sets and Profiles side by side, export to Excel, and apply changes — all directly from your browser. No setup required.</p>
   <a href="https://chromewebstore.google.com/detail/salesforce-manager/pieiphbhldfoabaicebcaooodfocmldl" class="btn btn-primary">Add to Chrome — It's Free</a>
 </div>
 
@@ -236,7 +236,7 @@
   <div class="container">
     <div class="section-label">Features</div>
     <h2>Everything a Salesforce admin needs</h2>
-    <p class="section-intro">One extension. Two powerful managers. No Connected App, no OAuth setup, no extra logins.</p>
+    <p class="section-intro">Log into your Salesforce org as you normally would, click the extension icon, and a new tab opens — already connected to your org. No Connected App, no OAuth setup, no extra logins.</p>
 
     <div class="screenshot-group">
       <div class="screenshot-group-title">Permission Set Manager</div>
@@ -244,31 +244,31 @@
         <div class="feature-card">
           <div class="feature-icon" style="background:#e8f0fe;">&#128274;</div>
           <h3>Object Permissions Matrix</h3>
-          <p>Select multiple Permission Sets and view a side-by-side matrix of C / R / U / D / VA / MA permissions per object. Filter by permission type or object name.</p>
+          <p>Pick the Permission Sets and Profiles you want to compare. You get a matrix — objects down the left, Permission Sets and Profiles across the top — with Create / Read / Edit / Delete / View All / Modify All shown for each combination. Filter by object name or permission type.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon" style="background:#fce8ff;">&#128203;</div>
           <h3>Field Permissions Matrix</h3>
-          <p>Drill into any object's field-level security across Permission Sets. See Read / Edit access per field in one scrollable table.</p>
+          <p>Drill into any object's field-level security across Permission Sets and Profiles. See Read / Edit access per field in one scrollable table.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon" style="background:#e8f0fe;">&#128269;</div>
           <h3>Smart Filtering</h3>
-          <p>Filter objects and fields by permission type. Dependency rules automatically enforce Salesforce's permission hierarchy (e.g. Edit requires Read).</p>
+          <p>Switch between Permission Sets and Profiles using the View By toggle. Filter by object name or permission type, and use dependency rules that automatically enforce Salesforce's permission hierarchy (e.g. Edit requires Read).</p>
         </div>
       </div>
       <div class="screenshot-grid">
         <figure>
-          <a href="images/object-permissions-manager.png" target="_blank">
-            <img src="images/object-permissions-manager.png" alt="Object Permissions Manager showing a side-by-side CRUDVAMA matrix across multiple Permission Sets" />
+          <a href="images/object-permissions-permission-sets.png" target="_blank">
+            <img src="images/object-permissions-permission-sets.png" alt="Object Permissions Manager showing a CRUDVAMA matrix viewed by Permission Sets" />
           </a>
-          <figcaption>Object Permissions Manager — side-by-side C/R/U/D/VA/MA matrix across Permission Sets</figcaption>
+          <figcaption>Object Permissions Manager — View By Permission Sets</figcaption>
         </figure>
         <figure>
-          <a href="images/field-permissions-manager.png" target="_blank">
-            <img src="images/field-permissions-manager.png" alt="Field Permissions Manager showing Read and Edit access per field" />
+          <a href="images/object-permissions-profiles.png" target="_blank">
+            <img src="images/object-permissions-profiles.png" alt="Object Permissions Manager showing a CRUDVAMA matrix viewed by Profiles" />
           </a>
-          <figcaption>Field Permissions Manager — Read/Edit access per field across Permission Sets</figcaption>
+          <figcaption>Object Permissions Manager — View By Profiles</figcaption>
         </figure>
       </div>
     </div>
@@ -384,8 +384,8 @@
       <div class="step">
         <div class="step-num"></div>
         <div>
-          <h3>Select Permission Sets and explore</h3>
-          <p>Search and multi-select Permission Sets, then switch between Object and Field Permissions tabs to explore, export, or import.</p>
+          <h3>Select Permission Sets or Profiles and explore</h3>
+          <p>Use the View By toggle to switch between Permission Sets and Profiles. Search and multi-select, then explore Object or Field Permissions, export to Excel, or import changes.</p>
         </div>
       </div>
     </div>
@@ -398,7 +398,7 @@
     <div class="section-label">Reference</div>
     <h2>Supported permissions</h2>
 
-    <p class="section-intro">Object Permissions tab — 7 permission columns per Permission Set:</p>
+    <p class="section-intro">Object Permissions tab — 7 permission columns per Permission Set / Profile:</p>
     <table class="perm-table">
       <thead>
         <tr><th>Column</th><th>Salesforce Field</th><th>Meaning</th></tr>
@@ -414,7 +414,7 @@
       </tbody>
     </table>
 
-    <p class="section-intro" style="margin-top:2rem;">Field Permissions tab — 2 permission columns per Permission Set:</p>
+    <p class="section-intro" style="margin-top:2rem;">Field Permissions tab — 2 permission columns per Permission Set / Profile:</p>
     <table class="perm-table">
       <thead>
         <tr><th>Column</th><th>Meaning</th></tr>
@@ -432,7 +432,7 @@
 <section class="cta">
   <div class="container">
     <h2>Ready to take control of your permissions?</h2>
-    <p>Free, open source, and built for Salesforce admins.</p>
+    <p>Free and built for Salesforce admins. Works with Permission Sets and Profiles.</p>
     <a href="https://chromewebstore.google.com/detail/salesforce-manager/pieiphbhldfoabaicebcaooodfocmldl" class="btn btn-primary">Add to Chrome</a>
   </div>
 </section>
